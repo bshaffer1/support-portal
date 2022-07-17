@@ -3,7 +3,7 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>Registration</title>
 </head>
 <body>
     <h1>Login</h1>
@@ -12,6 +12,10 @@
         <div class = "userEntry">
             <h3>Username: <input type="text" th:field="*{username}"/></h3>
             <h3>Password: <input type="password" th:field="*{password}"/></h3>
+            <br/>
+            <h3>First Name: <input type="text" th:field="*{firstName}"/></h3>
+            <h3>Last Name: <input type="text" th:field="*{lastName}"/></h3>
+
         </div>
         <button>Login</button>
     </form>
