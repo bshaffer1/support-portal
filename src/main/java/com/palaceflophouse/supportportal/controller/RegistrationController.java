@@ -1,11 +1,10 @@
 package com.palaceflophouse.supportportal.controller;
 
 import com.palaceflophouse.supportportal.entities.User;
+import com.palaceflophouse.supportportal.repository.UserRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Author: Brandon Shaffer
@@ -13,16 +12,24 @@ import org.springframework.web.bind.annotation.SessionAttributes;
  */
 @Controller
 @RequestMapping("/registration")
-@SessionAttributes("user")
 public class RegistrationController {
+
+	private UserRepository userRepo;
+	private PasswordEncoder passwordEncoder;
+
+	public RegistrationController(UserRepository userRepository, PasswordEncoder passwordEncoder){
+		this.userRepo = userRepository;
+		this.passwordEncoder = passwordEncoder;
+	}
 
 	@GetMapping
 	public String showRegistrationForm(){
 		return "registration";
 	}
 
-	@ModelAttribute(name = "user")
-	public User user(){
-		return new User();
+	@PostMapping
+	public String processRegistration(RegistrationForm form){
+		userRepo.save(form.toUser(passwordEncoder));
+		return "redirect:/login";
 	}
 }

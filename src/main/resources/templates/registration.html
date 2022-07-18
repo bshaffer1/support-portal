@@ -6,18 +6,25 @@
     <title>Registration</title>
 </head>
 <body>
-    <h1>Login</h1>
+    <h1>Register</h1>
     <br/>
-    <form method="POST" th:object="${user}">
+    <form method="POST" th:action="@{/registration}" id="registrationForm">
         <div class = "userEntry">
-            <h3>Username: <input type="text" th:field="*{username}"/></h3>
-            <h3>Password: <input type="password" th:field="*{password}"/></h3>
+            <label for="username">Username: </label>
+            <input type="text" />
             <br/>
-            <h3>First Name: <input type="text" th:field="*{firstName}"/></h3>
-            <h3>Last Name: <input type="text" th:field="*{lastName}"/></h3>
+            <label for="password">Password: </label>
+            <input type="password" name="password"/>
+            <br/>
+            <label for="firstName">First Name: </label>
+            <input type="text" name="firstName"/>
+            <br/>
+            <label for="lastName">Last Name: </label>
+            <input type="text" name="lastName"/>
+            <br/>
 
         </div>
-        <button>Login</button>
+        <input type="submit" value="Register"/>
     </form>
 </body>
 </html>

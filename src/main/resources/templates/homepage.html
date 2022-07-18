@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Homepage</title>
 </head>
 <body>
-    <h1>Homepage</h1>
-    <a th:href="@{/login}" id="login">Login</a>
-    <br/>
-    <a th:href="@{/registration}" id="registration">Register</a>
+    <h1>Welcome </h1>
 
+    Logged user: <span sec:authentication="name">Bob</span>
+
+    <br/>
+    <h2>Other</h2>
+    <span th:text="${#authentication.getPrincipal().getUsername()}"></span>
 </body>
 </html>
