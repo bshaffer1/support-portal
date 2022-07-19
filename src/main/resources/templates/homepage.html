@@ -8,11 +8,7 @@
 </head>
 <body>
     <h1>Welcome </h1>
+    <a th:href="@{/login}" id="login">Login</a>
 
-    Logged user: <span sec:authentication="name">Bob</span>
-
-    <br/>
-    <h2>Other</h2>
-    <span th:text="${#authentication.getPrincipal().getUsername()}"></span>
 </body>
 </html>

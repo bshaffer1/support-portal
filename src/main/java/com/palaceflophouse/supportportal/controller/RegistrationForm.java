@@ -21,7 +21,7 @@ public class RegistrationForm {
 	private String lastName;
 
 	public User toUser(PasswordEncoder passwordEncoder){
-		User user = new User(username, password, firstName, lastName, LocalDate.now());
+		User user = new User(username, passwordEncoder.encode(password), firstName, lastName, LocalDate.now());
 
 		return user;
 	}
