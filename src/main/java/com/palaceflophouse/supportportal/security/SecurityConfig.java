@@ -25,7 +25,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 				.authorizeRequests()
-				.antMatchers("/user-homepage").access("hasRole('USER')")
+				.mvcMatchers("/registration", "/login").anonymous()
+				.antMatchers("/user-homepage", "/change-password")
+					.access("hasRole('USER')")
 				.antMatchers("/", "/**").access("permitAll")
 
 				.and()
