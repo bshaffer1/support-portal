@@ -1,9 +1,6 @@
 package com.palaceflophouse.supportportal.entities;
 
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,7 +20,6 @@ import java.util.Collection;
 @Data
 @Entity
 @NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
-@RequiredArgsConstructor
 public class User implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
@@ -40,6 +36,15 @@ public class User implements UserDetails {
 
 	private final LocalDate dateCreated;
 	private Boolean isAdmin;
+
+	@Builder
+	public User(String username, String password, String firstName, String lastName, LocalDate dateCreated){
+		this.username = username;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.dateCreated = dateCreated;
+	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
