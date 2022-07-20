@@ -9,6 +9,10 @@
     <h1>User Homepage</h1>
     <h2>Hello, <span th:text="${user.firstName}">NAME</span>!</h2>
 
+    <form method="GET" th:action="@{/change-password}" id="changePassword">
+        <input type="submit" value="Change Password"/>
+    </form>
+
     <form method="POST" th:action="@{/logout}" id="logoutForm">
         <input type="submit" value="Logout"/>
     </form>
