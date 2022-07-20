@@ -29,7 +29,7 @@ public class User implements UserDetails {
 	private Long id;
 
 	private final String username;
-	private final String password;
+	private String password;
 
 	private final String firstName;
 	private final String lastName;
