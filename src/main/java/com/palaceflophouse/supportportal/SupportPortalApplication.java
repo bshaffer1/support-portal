@@ -25,7 +25,32 @@ public class SupportPortalApplication {
 				.lastName("user")
 				.build();
 		admin.setIsAdmin(true);
-		return args -> userRepository.save(admin);
+		User user1 = User.builder()
+				.username("bshaffer")
+				.password(encodedPassword)
+				.firstName("Brandon")
+				.lastName("Shaffer")
+				.build();
+		User user2 = User.builder()
+				.username("ashaffer")
+				.password(encodedPassword)
+				.firstName("Amber")
+				.lastName("Shaffer")
+				.build();
+		User user3 = User.builder()
+				.username("cshaffer")
+				.password(encodedPassword)
+				.firstName("Cormac")
+				.lastName("Shaffer")
+				.build();
+
+		return args -> {
+			userRepository.save(admin);
+			userRepository.save(user1);
+			userRepository.save(user2);
+			userRepository.save(user3);
+
+		};
 	}
 
 }
