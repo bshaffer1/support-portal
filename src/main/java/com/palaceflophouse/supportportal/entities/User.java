@@ -35,7 +35,7 @@ public class User implements UserDetails {
 	private final String lastName;
 
 	private final LocalDate dateCreated;
-	private Boolean isAdmin;
+	private Boolean isAdmin = false;
 
 	@Builder
 	public User(String username, String password, String firstName, String lastName, LocalDate dateCreated){
