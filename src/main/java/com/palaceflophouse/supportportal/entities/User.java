@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Author: Brandon Shaffer
@@ -48,7 +49,19 @@ public class User implements UserDetails {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
+		SimpleGrantedAuthority[] auths;
+		if(isAdmin){
+			auths = new SimpleGrantedAuthority[2];
+			auths[1] = new SimpleGrantedAuthority("ROLE_ADMIN");
+		}
+		else{
+			auths = new SimpleGrantedAuthority[2];
+		}
+		auths[0] = new SimpleGrantedAuthority("ROLE_USER");
+
+		List<SimpleGrantedAuthority> grantedAuthorities = Arrays.asList(auths);
+
+		return grantedAuthorities;
 	}
 
 	@Override

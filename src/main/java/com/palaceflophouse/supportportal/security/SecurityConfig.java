@@ -26,8 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 				.authorizeRequests()
 				.mvcMatchers("/registration", "/login").anonymous()
-				//TODO Configure admin role.
-//				.antMatchers("/admin-console").access("hasRole('ADMIN')")
+				.antMatchers("/admin-console").access("hasRole('ADMIN')")
 				.antMatchers("/user-homepage", "/change-password")
 					.access("hasRole('USER')")
 				.antMatchers("/", "/**").access("permitAll")
