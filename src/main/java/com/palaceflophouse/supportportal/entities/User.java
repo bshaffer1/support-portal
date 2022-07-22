@@ -55,7 +55,7 @@ public class User implements UserDetails {
 			auths[1] = new SimpleGrantedAuthority("ROLE_ADMIN");
 		}
 		else{
-			auths = new SimpleGrantedAuthority[2];
+			auths = new SimpleGrantedAuthority[1];
 		}
 		auths[0] = new SimpleGrantedAuthority("ROLE_USER");
 
