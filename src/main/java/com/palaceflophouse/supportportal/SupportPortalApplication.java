@@ -23,6 +23,7 @@ public class SupportPortalApplication {
 				.password(encodedPassword)
 				.firstName("admin")
 				.lastName("user")
+				.email("admin@admin.com")
 				.build();
 		admin.setIsAdmin(true);
 		User user1 = User.builder()
@@ -30,18 +31,21 @@ public class SupportPortalApplication {
 				.password(encodedPassword)
 				.firstName("Brandon")
 				.lastName("Shaffer")
+				.email("brandonrussellshaffer@gmail.com")
 				.build();
 		User user2 = User.builder()
 				.username("ashaffer")
 				.password(encodedPassword)
 				.firstName("Amber")
 				.lastName("Shaffer")
+				.email("amberlaurenshaffer@gmail.com")
 				.build();
 		User user3 = User.builder()
 				.username("cshaffer")
 				.password(encodedPassword)
 				.firstName("Cormac")
 				.lastName("Shaffer")
+				.email("cormacrussellshaffer@gmail.com")
 				.build();
 
 		return args -> {
@@ -49,7 +53,6 @@ public class SupportPortalApplication {
 			userRepository.save(user1);
 			userRepository.save(user2);
 			userRepository.save(user3);
-
 		};
 	}
 

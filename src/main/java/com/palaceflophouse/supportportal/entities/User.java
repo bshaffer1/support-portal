@@ -35,15 +35,18 @@ public class User implements UserDetails {
 	private final String firstName;
 	private final String lastName;
 
+	private final String email;
+
 	private final LocalDate dateCreated;
 	private Boolean isAdmin = false;
 
 	@Builder
-	public User(String username, String password, String firstName, String lastName, LocalDate dateCreated){
+	public User(String username, String password, String firstName, String lastName, String email, LocalDate dateCreated){
 		this.username = username;
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.email = email;
 		this.dateCreated = dateCreated;
 	}
 

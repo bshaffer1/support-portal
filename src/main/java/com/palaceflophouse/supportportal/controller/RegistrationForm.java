@@ -20,8 +20,17 @@ public class RegistrationForm {
 	private String firstName;
 	private String lastName;
 
+	private String email;
+
 	public User toUser(PasswordEncoder passwordEncoder){
-		User user = new User(username, passwordEncoder.encode(password), firstName, lastName, LocalDate.now());
+		User user = User.builder()
+				.username(username)
+				.password(passwordEncoder.encode(password))
+				.firstName(firstName)
+				.lastName(lastName)
+				.email(email)
+				.dateCreated(LocalDate.now())
+				.build();
 
 		return user;
 	}
