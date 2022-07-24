@@ -2,8 +2,9 @@ package com.palaceflophouse.supportportal.controller;
 
 import com.palaceflophouse.supportportal.entities.User;
 import com.palaceflophouse.supportportal.repository.UserRepository;
+import com.palaceflophouse.supportportal.service.UserRepositoryUserDetailsService;
+import com.palaceflophouse.supportportal.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -20,14 +21,12 @@ import java.security.Principal;
 @RequestMapping("/change-password")
 public class ChangePasswordController {
 
-	private final UserRepository userRepository;
-	private final PasswordEncoder passwordEncoder;
+	private final UserService userService;
 	private String username;
 
 	@Autowired
-	public ChangePasswordController(UserRepository userRepository, PasswordEncoder passwordEncoder){
-		this.userRepository = userRepository;
-		this.passwordEncoder = passwordEncoder;
+	public ChangePasswordController(UserService userService){
+		this.userService = userService;
 	}
 
 	@GetMapping
@@ -39,17 +38,17 @@ public class ChangePasswordController {
 	public User user(Principal principal){
 		String username = principal.getName();
 		this.username = username;
-		User user = userRepository.findByUsername(username);
+		User user = (User) userService.loadUserByUsername(username);
 		return user;
 	}
 
 	@PostMapping
 	public String processChangePassword(ChangePasswordForm changePasswordForm){
-		User thisUser = userRepository.findByUsername(username);
+		User thisUser = (User) userService.loadUserByUsername(username);
 
 		String oldPassword = changePasswordForm.getOldPassword();
-		String currentPassword = thisUser.getPassword();
-		if(!passwordEncoder.matches(oldPassword, currentPassword)){
+		boolean isValid = userService.checkUserPassword(thisUser, oldPassword);
+		if(!isValid){
 			throw new IllegalStateException("Old Password was incorrect!");
 		}
 
@@ -59,10 +58,7 @@ public class ChangePasswordController {
 			throw new IllegalStateException("Passwords did not match!");
 		}
 
-		String encodedNewPassword = passwordEncoder.encode(newPassword);
-		thisUser.setPassword(encodedNewPassword);
-
-		this.userRepository.save(thisUser);
+		userService.updateUserPassword(thisUser, newPassword);
 
 		return "redirect:/user-homepage";
 	}
