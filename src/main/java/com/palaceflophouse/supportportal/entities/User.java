@@ -32,10 +32,10 @@ public class User implements UserDetails {
 	private final String username;
 	private String password;
 
-	private final String firstName;
-	private final String lastName;
+	private String firstName;
+	private String lastName;
 
-	private final String email;
+	private String email;
 
 	private final LocalDate dateCreated;
 	private Boolean isAdmin = false;

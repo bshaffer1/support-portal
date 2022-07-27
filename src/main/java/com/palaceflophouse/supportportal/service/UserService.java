@@ -4,6 +4,8 @@ import com.palaceflophouse.supportportal.entities.PasswordResetToken;
 import com.palaceflophouse.supportportal.entities.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Optional;
+
 /**
  * Author: Brandon Shaffer
  * Date: 7/23/2022
@@ -20,7 +22,11 @@ public interface UserService {
 
 	PasswordResetToken loadToken(String token);
 
-	void updateUserPassword(User user, String password);
+	User updateUserPassword(User user, String password);
 
 	boolean checkUserPassword(User user, String password);
+
+	Optional<User> loadUserById(Long userId);
+
+	User saveUser(User user);
 }

@@ -15,7 +15,7 @@ import java.util.List;
  * Date: 7/20/2022
  */
 @Configuration
-@RequestMapping("/admin-console")
+@RequestMapping("/admin/admin-console")
 public class AdminConsoleController {
 
 	public final UserRepository userRepository;

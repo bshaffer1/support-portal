@@ -10,7 +10,7 @@
     <h2>Hello, <span th:text="${user.firstName}">NAME</span>!</h2>
 
     <div th:if="${user.isAdmin} == true">
-        <a th:href="@{/admin-console}" id="admin-console">Admin Console</a>
+        <a th:href="@{/admin/admin-console}" id="admin-console">Admin Console</a>
     </div>
 
     <form method="GET" th:action="@{/change-password}" id="changePassword">

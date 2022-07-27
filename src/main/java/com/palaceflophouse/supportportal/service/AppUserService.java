@@ -10,6 +10,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 /**
  * Author: Brandon Shaffer
  * Date: 7/23/2022
@@ -26,6 +28,17 @@ public class AppUserService implements UserService{
 		this.userRepo = userRepo;
 		this.passwordResetTokenRepo = passwordResetTokenRepository;
 		this.passwordEncoder = passwordEncoder;
+	}
+
+	@Override
+	public Optional<User> loadUserById(Long userId) {
+		return userRepo.findById(userId);
+	}
+
+	@Override
+	public User saveUser(User user) {
+		User save = userRepo.save(user);
+		return save;
 	}
 
 	@Override
@@ -74,10 +87,10 @@ public class AppUserService implements UserService{
 		return passwordResetTokenRepo.findByToken(token);
 	}
 
-	public void updateUserPassword(User user, String password){
+	public User updateUserPassword(User user, String password){
 		String encodedPassword = passwordEncoder.encode(password);
 		user.setPassword(encodedPassword);
-		userRepo.save(user);
+		return userRepo.save(user);
 	}
 
 	public boolean checkUserPassword(User user, String password){

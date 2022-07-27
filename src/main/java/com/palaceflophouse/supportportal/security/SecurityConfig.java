@@ -26,7 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 				.authorizeRequests()
 				.mvcMatchers("/registration", "/login").anonymous()
-				.antMatchers("/admin-console").access("hasRole('ADMIN')")
+				.antMatchers("/admin/**").access("hasRole('ADMIN')")
 				.antMatchers("/user-homepage", "/change-password")
 					.access("hasRole('USER')")
 				.antMatchers("/", "/**").access("permitAll")
