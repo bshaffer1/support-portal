@@ -1,20 +1,33 @@
 package com.palaceflophouse.supportportal.entities;
 
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Controller;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Author: Brandon Shaffer
  * Date: 7/16/2022
  */
 @Data
+@Entity
+@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
 public class Account {
 
-	String accountName;
-	LocalDate dateCreated;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 
-	List<String> users;
+	@Column(unique = true)
+	private final String name;
+	private final LocalDate dateCreated;
 
+	@OneToMany(targetEntity = User.class, fetch = FetchType.EAGER)
+	@JoinColumn(name = "users")
+	private Set<User> users;
 }

@@ -17,4 +17,6 @@ public class EditUserForm {
 	private String lastName;
 
 	private String email;
+
+	private Long newAccount;
 }

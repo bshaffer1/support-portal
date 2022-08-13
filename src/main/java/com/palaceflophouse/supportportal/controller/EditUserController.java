@@ -1,6 +1,8 @@
 package com.palaceflophouse.supportportal.controller;
 
+import com.palaceflophouse.supportportal.entities.Account;
 import com.palaceflophouse.supportportal.entities.User;
+import com.palaceflophouse.supportportal.service.AccountService;
 import com.palaceflophouse.supportportal.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.thymeleaf.util.StringUtils;
 
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * Author: Brandon Shaffer
@@ -22,10 +25,12 @@ import java.util.Optional;
 public class EditUserController {
 
 	private final UserService userService;
+	private final AccountService accountService;
 
 	@Autowired
-	public EditUserController(UserService userService) {
+	public EditUserController(UserService userService, AccountService accountService) {
 		this.userService = userService;
+		this.accountService = accountService;
 	}
 
 	@GetMapping
@@ -35,12 +40,18 @@ public class EditUserController {
 				-> new IllegalStateException("No user found matching ID."));
 
 		model.addAttribute("user", user);
-		//TODO Add the accounts for this user to the model.
+		Account currentAccount = user.getAccount();
+		model.addAttribute("currentAccount", currentAccount);
+
+		Set<Account> accounts = accountService.loadAllAccounts();
+		model.addAttribute("accounts", accounts);
+
 		return "edit-user";
 	}
 
 	@PostMapping
-	public String processEditUser(@RequestParam Long userId, EditUserForm form){
+	public String processEditUser(@RequestParam Long userId, @RequestParam Long currentAccountId,
+			EditUserForm form){
 
 		User user = userService.loadUserById(userId).orElseThrow();
 
@@ -62,6 +73,16 @@ public class EditUserController {
 		user.setFirstName(form.getFirstName());
 		user.setLastName(form.getLastName());
 		user.setEmail(form.getEmail());
+
+		//Set the user's account if it's new
+		Long newAccountId = form.getNewAccount();
+		if(newAccountId != null){
+			if(!newAccountId.equals(currentAccountId)){
+				Account account = accountService.loadAccountById(newAccountId)
+						.orElseThrow(() -> new IllegalStateException());
+				user.setAccount(account);
+			}
+		}
 
 		userService.saveUser(user);
 		return "redirect:/admin/admin-console";
