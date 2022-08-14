@@ -1,6 +1,7 @@
 package com.palaceflophouse.supportportal.entities;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -30,4 +31,10 @@ public class Account {
 	@OneToMany(targetEntity = User.class, fetch = FetchType.EAGER)
 	@JoinColumn(name = "users")
 	private Set<User> users;
+
+	@Builder
+	public Account(String name, LocalDate dateCreated){
+		this.name = name;
+		this.dateCreated = dateCreated;
+	}
 }

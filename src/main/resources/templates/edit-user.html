@@ -8,10 +8,12 @@
 <body>
     <h1>Edit User</h1>
 
-    <label for="current-account">Current Account: </label>
-    <span id="current-account" th:value="${currentAccount.name}"></span>
+    <div th:if="${currentAccount} != null">
+        <label for="current-account">Current Account: </label>
+        <span id="current-account" th:value="${currentAccount.name}"></span>
+    </div>
 
-    <form method="POST" th:action="@{/admin/edit-user(userId=${user.id},(accountId=${currentAccountId.id})}" id="registrationForm">
+    <form method="POST" th:action="@{/admin/edit-user(userId=${user.id}}" id="registrationForm">
         <label for="username">Username: </label>
         <input type="text" name="username" id="username" th:value="${user.username}" disabled="disabled" readonly/><br/>
         <br/>

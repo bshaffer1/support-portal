@@ -38,7 +38,7 @@ public class User implements UserDetails {
 	private Boolean isAdmin = false;
 
 	@ManyToOne(targetEntity = Account.class, fetch = FetchType.EAGER)
-	@JoinColumn(nullable = false, name = "account_id")
+	@JoinColumn(name = "account_id")
 	private Account account;
 
 	@Builder

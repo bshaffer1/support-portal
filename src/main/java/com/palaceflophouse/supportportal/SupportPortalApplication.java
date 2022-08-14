@@ -1,6 +1,8 @@
 package com.palaceflophouse.supportportal;
 
+import com.palaceflophouse.supportportal.entities.Account;
 import com.palaceflophouse.supportportal.entities.User;
+import com.palaceflophouse.supportportal.repository.AccountRepository;
 import com.palaceflophouse.supportportal.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -16,8 +18,10 @@ public class SupportPortalApplication {
 	}
 
 	@Bean
-	public CommandLineRunner addAdminUserOnStartup(UserRepository userRepository, PasswordEncoder encoder){
-		String encodedPassword = encoder.encode("password1");
+	public CommandLineRunner addAdminUserOnStartup(UserRepository userRepository,
+												   AccountRepository accountRepository,
+												   PasswordEncoder encoder){
+		String encodedPassword = encoder.encode("kims2008");
 		User admin = User.builder()
 				.username("admin")
 				.password(encodedPassword)
@@ -48,11 +52,26 @@ public class SupportPortalApplication {
 				.email("cormacrussellshaffer@gmail.com")
 				.build();
 
+		Account account1 = Account.builder()
+				.name("Bologna Technologies")
+				.build();
+
+		Account account2 = Account.builder()
+				.name("Mud Pharma")
+				.build();
+
+		Account account3 = Account.builder()
+				.name("69DT")
+				.build();
+
 		return args -> {
 			userRepository.save(admin);
 			userRepository.save(user1);
 			userRepository.save(user2);
 			userRepository.save(user3);
+			accountRepository.save(account1);
+			accountRepository.save(account2);
+			accountRepository.save(account3);
 		};
 	}
 

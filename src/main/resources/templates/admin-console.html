@@ -25,6 +25,19 @@
             <td><a th:href="@{/admin/edit-user(userId=${user.id})}">edit</a> </td>
         </tr>
     </table>
+    <br/>
+    <br/>
+    <h2>Accounts</h2>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Edit</th>
+        </tr>
+        <tr th:each = "account : ${accounts}">
+            <td th:text="${account.name}"></td>
+            <td><a th:href="@{/admin/edit-account(accountId=${account.id})}">edit</a> </td>
+        </tr>
+    </table>
 
 </body>
 </html>
