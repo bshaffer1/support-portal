@@ -18,5 +18,6 @@ public class EditUserForm {
 
 	private String email;
 
-	private Long newAccount;
+	private String currentAccount;
+	private String newAccount;
 }

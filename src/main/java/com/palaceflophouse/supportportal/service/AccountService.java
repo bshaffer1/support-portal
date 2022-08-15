@@ -20,4 +20,6 @@ public interface AccountService {
 
 	Account addUserToAccount(Account account, User user);
 
+	Optional<Account> loadAccountByName(String name);
+
 }

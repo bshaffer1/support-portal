@@ -8,12 +8,7 @@
 <body>
     <h1>Edit User</h1>
 
-    <div th:if="${currentAccount} != null">
-        <label for="current-account">Current Account: </label>
-        <span id="current-account" th:value="${currentAccount.name}"></span>
-    </div>
-
-    <form method="POST" th:action="@{/admin/edit-user(userId=${user.id}}" id="registrationForm">
+    <form method="POST" th:action="@{/admin/edit-user(userId=${user.id})}" id="editUserForm">
         <label for="username">Username: </label>
         <input type="text" name="username" id="username" th:value="${user.username}" disabled="disabled" readonly/><br/>
         <br/>
@@ -33,12 +28,18 @@
         <input type="text" name="lastName" id="lastName" th:value="${user.lastName}"/>
         <br/>
 
+        <div th:if="${currentAccount} != null">
+            <label for="currentAccount">Current Account: </label>
+            <input type="text" name="currentAccount" id="currentAccount"
+                   th:value="${currentAccount.name}" disabled="disabled" readonly/>
+        </div>
+
         <label for="newAccount">Choose an account for the user: </label>
         <input list="newAccounts" name="newAccount" id="newAccount">
         <datalist id="newAccounts">
             <option th:each="account : ${accounts}"
-                    th:text="${account.name}"
-                    th:value="${user.id}">
+                    th:value="${account.name}">
+            </option>
         </datalist>
 
         <input type="submit" value="Save"/>

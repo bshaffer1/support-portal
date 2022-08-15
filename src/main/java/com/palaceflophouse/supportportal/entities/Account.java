@@ -20,6 +20,8 @@ import java.util.Set;
 @NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
 public class Account {
 
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;

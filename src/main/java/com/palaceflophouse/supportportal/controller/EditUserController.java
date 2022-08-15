@@ -50,8 +50,7 @@ public class EditUserController {
 	}
 
 	@PostMapping
-	public String processEditUser(@RequestParam Long userId, @RequestParam Long currentAccountId,
-			EditUserForm form){
+	public String processEditUser(@RequestParam Long userId, EditUserForm form){
 
 		User user = userService.loadUserById(userId).orElseThrow();
 
@@ -75,10 +74,10 @@ public class EditUserController {
 		user.setEmail(form.getEmail());
 
 		//Set the user's account if it's new
-		Long newAccountId = form.getNewAccount();
+		String newAccountId = form.getNewAccount();
 		if(newAccountId != null){
-			if(!newAccountId.equals(currentAccountId)){
-				Account account = accountService.loadAccountById(newAccountId)
+			if(!newAccountId.equals(form.getCurrentAccount())){
+				Account account = accountService.loadAccountByName(newAccountId)
 						.orElseThrow(() -> new IllegalStateException());
 				user.setAccount(account);
 			}

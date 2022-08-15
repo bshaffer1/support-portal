@@ -53,4 +53,9 @@ public class AppAccountService implements AccountService {
 		users.add(user);
 		return saveAccount(account);
 	}
+
+	@Override
+	public Optional<Account> loadAccountByName(String name) {
+		return accountRepo.findByName(name);
+	}
 }
