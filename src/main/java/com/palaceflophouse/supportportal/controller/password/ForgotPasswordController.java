@@ -1,10 +1,9 @@
-package com.palaceflophouse.supportportal.controller;
+package com.palaceflophouse.supportportal.controller.password;
 
 import com.palaceflophouse.supportportal.entities.PasswordResetToken;
 import com.palaceflophouse.supportportal.entities.User;
 import com.palaceflophouse.supportportal.service.EmailSender;
 import com.palaceflophouse.supportportal.service.TokenStatus;
-import com.palaceflophouse.supportportal.service.UserRepositoryUserDetailsService;
 import com.palaceflophouse.supportportal.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

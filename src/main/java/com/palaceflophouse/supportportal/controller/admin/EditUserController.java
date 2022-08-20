@@ -1,4 +1,4 @@
-package com.palaceflophouse.supportportal.controller;
+package com.palaceflophouse.supportportal.controller.admin;
 
 import com.palaceflophouse.supportportal.entities.Account;
 import com.palaceflophouse.supportportal.entities.User;
@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.thymeleaf.util.StringUtils;
 
-import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -74,10 +73,10 @@ public class EditUserController {
 		user.setEmail(form.getEmail());
 
 		//Set the user's account if it's new
-		String newAccountId = form.getNewAccount();
-		if(newAccountId != null){
-			if(!newAccountId.equals(form.getCurrentAccount())){
-				Account account = accountService.loadAccountByName(newAccountId)
+		String newAccountName = form.getNewAccount();
+		if(newAccountName != null){
+			if(!newAccountName.equals(form.getCurrentAccount())){
+				Account account = accountService.loadAccountByName(newAccountName)
 						.orElseThrow(() -> new IllegalStateException());
 				user.setAccount(account);
 			}

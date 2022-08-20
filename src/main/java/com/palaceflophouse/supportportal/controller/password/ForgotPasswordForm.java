@@ -1,4 +1,4 @@
-package com.palaceflophouse.supportportal.controller;
+package com.palaceflophouse.supportportal.controller.password;
 
 import lombok.Data;
 

@@ -1,4 +1,4 @@
-package com.palaceflophouse.supportportal.controller;
+package com.palaceflophouse.supportportal.controller.register;
 
 import com.palaceflophouse.supportportal.entities.User;
 import lombok.Data;
