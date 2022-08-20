@@ -1,9 +1,6 @@
 package com.palaceflophouse.supportportal.entities;
 
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.stereotype.Controller;
 
 import javax.persistence.*;
@@ -15,7 +12,8 @@ import java.util.Set;
  * Author: Brandon Shaffer
  * Date: 7/16/2022
  */
-@Data
+@Getter
+@Setter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
 public class Account {
@@ -30,8 +28,7 @@ public class Account {
 	private final String name;
 	private final LocalDate dateCreated;
 
-	@OneToMany(targetEntity = User.class, fetch = FetchType.EAGER)
-	@JoinColumn(name = "users")
+	@OneToMany(mappedBy = "account")
 	private Set<User> users;
 
 	@Builder

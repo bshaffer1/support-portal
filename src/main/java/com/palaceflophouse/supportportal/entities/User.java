@@ -15,7 +15,8 @@ import java.util.List;
  * Author: Brandon Shaffer
  * Date: 7/16/2022
  */
-@Data
+@Getter
+@Setter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
 public class User implements UserDetails {
@@ -37,7 +38,7 @@ public class User implements UserDetails {
 	private final LocalDate dateCreated;
 	private Boolean isAdmin = false;
 
-	@ManyToOne(targetEntity = Account.class, fetch = FetchType.EAGER)
+	@ManyToOne
 	@JoinColumn(name = "account_id")
 	private Account account;
 
@@ -66,6 +67,16 @@ public class User implements UserDetails {
 		List<SimpleGrantedAuthority> grantedAuthorities = Arrays.asList(auths);
 
 		return grantedAuthorities;
+	}
+
+	@Override
+	public String getPassword() {
+		return password;
+	}
+
+	@Override
+	public String getUsername() {
+		return username;
 	}
 
 	@Override
