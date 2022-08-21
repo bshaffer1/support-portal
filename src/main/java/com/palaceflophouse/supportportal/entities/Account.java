@@ -31,6 +31,9 @@ public class Account {
 	@OneToMany(mappedBy = "account")
 	private Set<User> users;
 
+	@OneToMany(mappedBy = "account")
+	private List<SupportItem> supportItems;
+
 	@Builder
 	public Account(String name, LocalDate dateCreated){
 		this.name = name;
